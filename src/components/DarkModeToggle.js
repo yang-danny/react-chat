@@ -5,7 +5,7 @@ import { CgDarkMode } from "react-icons/cg";
 class DarkModeToggle extends Component {
   constructor(props) {
     super(props);
-
+    //load settings from local storage
     if(JSON.parse(localStorage.getItem('DARK_MODE')) === true) {
       document.body.classList.add('dark-mode');
     }
@@ -16,7 +16,7 @@ class DarkModeToggle extends Component {
 
     this.handleModeChange = this.handleModeChange.bind(this);
   }
-
+//function for Mode Change
   handleModeChange() {
     if(!this.state.darkMode) {
         document.body.classList.add('dark-mode');

@@ -20,7 +20,7 @@ const Input = () => {
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-
+ //Create new message after user clicked Send button
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());

@@ -6,11 +6,12 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import logo from '../img/logo.png';
+
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+//Async function for user register with entered information
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -18,11 +19,10 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
+//Access to firebase to create a user
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
       //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
@@ -42,7 +42,6 @@ const Register = () => {
               email,
               photoURL: downloadURL,
             });
-
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");

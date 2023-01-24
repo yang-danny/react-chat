@@ -22,7 +22,7 @@ const { dispatch } = useContext(ChatContext);
 
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-
+  // handle which friend user want to chat with
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };

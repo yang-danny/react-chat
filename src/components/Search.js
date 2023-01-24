@@ -20,7 +20,7 @@ const Search = () => {
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
-
+//Async search for users
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
@@ -36,7 +36,7 @@ const Search = () => {
       setErr(true);
     }
   };
-
+//start search after user entered key
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
   };
@@ -54,7 +54,7 @@ const Search = () => {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        //create user chats
+        //create user chats for login user
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -63,7 +63,7 @@ const Search = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-
+       //create user chats for friend user
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
@@ -74,7 +74,7 @@ const Search = () => {
         });
       }
     } catch (err) {}
-
+    
     setUser(null);
     setUsername("")
   };
